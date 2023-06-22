@@ -1,36 +1,44 @@
  
-*{
+*{  
+    padding: 0;   
     box-sizing: border-box;
     margin: 0;
 }
 .layout{
-    height: 1000px;
-    width: 100%;
-    border: 2px solid;
-    padding: 50px;
+    max-height: 100vh;
+    max-width: 100%;
 }
+
+/* Clara: This is the top part of our website - just to be uniqute and more charactic  can comes up with a logo of something that is optional */ 
+p {
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 3px;
+    text-align: center;
+    color: black;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    background-color: #f0f0f0;
+}
+
+/* Clara: I have made the canvas width to 100% so it fits the whole screen - bit more similar to what we aiming for */
 .canvas{
-    border: 10px solid;
-    height: 500px;
-    width: 800px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 7px;
+    height:80vh;
+    width: 100%;
     box-shadow: 10px;
 }
 
+/* Clara: This is the toolbox section css - */
 .container{
     /* border: 2px solid; */
-    width: 800px;
     display: flex;
-    margin-top: 20px;
+    align-items: center;
     justify-content: center;
-
-}
-
-.color-container,.btns-container,.utilities-container{
-    height: 50px;
-    width: 200px;
-    /* border: 2px solid red; */
-    border-radius: 20px;
-    display: flex;
+    height: 120px;
 }
 
 /* .color-container.purple:nth-child(5){
@@ -39,29 +47,20 @@
     width: 40px;
 } */
 
-
-
 .colors{
     height:30px;
     width: 30px;
-    border-radius: 50%;
-    margin: auto;
+    border-radius: 3px;
+    margin: 10px;
 }
 
-.btns{
-    height: 45px;
-    width: 80px;
-    border-radius: 50%;
-    margin: auto;
-
-}
-
-.utilities{
-    margin: auto;
-    height: 0px;
+.btn{
+    height: 60px;
+    width: 50px;
+    margin: 1px;
 }
 
 .options{
     height:600px;
-    width: 300px;
+    width: 00px;
 }
