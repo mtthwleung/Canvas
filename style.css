@@ -38,7 +38,22 @@ p {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 120px;
+    height: 80px;
+   
+}
+
+.options-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+label {
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 2px;
+    font-size: 16px;
+
 }
 
 /* .color-container.purple:nth-child(5){
@@ -67,4 +82,47 @@ p {
 
 .active {
     border: 1px solid black;
+}
+
+#fill-color {
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+    border-radius: 3px;
+    margin: 10px;
+}
+
+#fill-color:checked~ label {
+    color: grey;
+} 
+
+/* Pen width slider */
+#size-slider {
+    margin: 10px;
+}
+
+button {
+    width: 150px;
+    color: #333;
+    padding: 11px 0;
+    font-size: 13px;
+    margin-bottom: 13px;
+    background: none;
+    border: 1px solid  #333;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 8px;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 1px;
+}
+
+.clear-canvas {
+    background-color: #333;
+    color: #fff;
+}
+
+/* Clear Canvas btn and Save Img btn CSS */
+.row-buttons {
+    display: flex;
+    justify-content: center;
 }
