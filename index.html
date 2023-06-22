@@ -13,31 +13,43 @@
 <body>
     <!-- Our Canva here, commented by clara-->
     <div class="layout">
-    <p>Canva Project</p>
-    <canvas class="canvas"></canvas>
+        <p>Canva Project</p>
+        <canvas class="canvas"></canvas>
+        <!-- Colors Options here, commented by clara-->      
+        <div class="container">
+            <div class="colors" style="background-color: black;"></div>
+            <div class="colors" style="background-color: blue;"></div>
+            <div class="colors" style="background-color: red;"></div>
+            <div class="colors" style="background-color: yellow;"></div>
+            <div class="colors selected" style="background-color: green;"></div>
+        
+        <!-- Tools Container here, commented by clara -->
+        <!-- I have personalised the image icon so all sizes & styles are relativly similar-->
+            <div class="btns-container">
+                <img src="img/undo.png" class="btn undo-btn" alt="" id="undo">
+                <img src="img/redo.png" class="btn redo-btn" alt="" id="redo">
+                <img src="img/brush.png" class="btn brush-btn tool active" alt="" id="brush">
+                <img src="img/eraser.png" class="btn eraser-btn tool" alt="" id="eraser">
+                <img src="img/circle.png" class="btn circle-btn tool" alt="" id="circle">
+                <img src="img/rectangle.png" class="btn rectangle-btn tool" alt="" id="rectangle">
+                <img src="img/triangle.png" class="btn triangle-btn tool" alt="" id="triangle">
+                <img src="img/line.png" class="btn line-btn tool" alt="" id="line">
+                <img src="img/curved line.png" class="btn line-btn tool" alt="" id="curvedLine">
+            </div>
+        </div>
+    </div>
+        <!-- Fill color btn, Clear Canvas btn, and save img btn, clara-->
+        <div class="options-container">
+            <input type="checkbox" id="fill-color">
+            <label for="fill-color">Fill Color</label>
+        <div class="row-buttons">
+            <input type="range" id="size-slider" min="1" max="30" value="5">
+            <button class="clear-canvas">Clear Canvas</button>
+            <button class="save-img">Save As Image</button>
+            </div>
+        </div>
 
-    <!-- Colors Options here, commented by clara-->      
-    <div class="container">
-    <div class="colors" style="background-color: black;"></div>
-    <div class="colors" style="background-color: blue;"></div>
-    <div class="colors" style="background-color: red;"></div>
-    <div class="colors" style="background-color: yellow;"></div>
-    <div class="colors selected" style="background-color: green;"></div>
-    
-    <!-- Tools Container here, commented by clara -->
-    <!-- I have personalised the image icon so all sizes & styles are relativly similar-->
-    <div class="btns-container">
-    <img src="img/undo.png" class="btn undo-btn" alt="">
-    <img src="img/redo.png" class="btn redo-btn" alt="">
-    <img src="img/brush.png" class="btn brush-btn" alt="">
-    <img src="/img/eraser.png" class="btn eraser-btn" alt="">
-    <img src="/img/circle.png" class="btn circle-btn" alt="">
-    <img src="/img/rectangle.png" class="btn rectangle-btn" alt="">
-    <img src="/img/triangle.png" class="btn triangle-btn" alt="">
-    </div>
-    </div>
-    </div>
-    </div>
+    <script type="text/javascript" src="paint.js"></script>
 </body>
 
 </html>
