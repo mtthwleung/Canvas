@@ -86,10 +86,30 @@ const drawCricle = (e) => {
 }
 
 const drawLine = (e) => {
+    let brush = "black";
+    let brushWidth = 5;
+
+    ctx.beginPath()
+    ctx.moveTo(MouseX,MouseY);
+    ctx.lineTo(e.offsetX,e.offsetY);
+
+    ctx.stroke();
 
 }
 
 const drawCurvedLine = (e) => {
+    
+    let brush = "black";
+    let brushWidth = 5;
+
+    ctx.beginPath();
+    ctx.moveTo(MouseX,MouseY);
+    ctx.bezierCurveTo(e.offsetX*2,e.offsetY/2,e.offsetX*2,e.offsetY/2,e.offsetX+100,e.offsetY+100);
+    
+
+
+    ctx.stroke();
+
 
 }
 
