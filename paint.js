@@ -71,16 +71,27 @@ const drawCurvedLine = (e) => {
 }
 
 const undo = () => {
-    undoStack.pop(); // removes last snapshot from undo stack
+    redoStack.push(undoStack.pop()); // removes last snapshot from undo stack
     ctx.clearRect(0, 0, canvas.width, canvas.height) // clears the canvas
     undoStack.forEach(snapshot => {
         ctx.putImageData(snapshot, 0, 0);
     })
 }
 
+const redo = () => {
+    const snapshot = redoStack.pop();
+    undoStack.push(snapshot);
+    ctx.putImageData(snapshot, 0, 0);
+
+    // undoStack.push(redoStack.shift());
+    // undoStack.forEach(snapshot => {
+    //     ctx.putImageData(snapshot, 0, 0);
+    // })
+};
 
 canvas.addEventListener("mousedown", startDrawing);
 canvas.addEventListener("mousemove", drawing);
 canvas.addEventListener("mouseup", stopDrawing);
 
 document.querySelector("#undo").addEventListener("click", undo);
+document.querySelector("#redo").addEventListener("click", redo);
