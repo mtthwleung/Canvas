@@ -60,7 +60,11 @@ p {
     margin: 1px;
 }
 
-.options{
+/* .options{
     height:600px;
     width: 00px;
+} */
+
+.active {
+    border: 1px solid black;
 }
