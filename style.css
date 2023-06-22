@@ -41,12 +41,6 @@ p {
     height: 120px;
 }
 
-/* .color-container.purple:nth-child(5){
-    background-color: purple;
-    height: 40px;
-    width: 40px;
-} */
-
 .colors{
     height:30px;
     width: 30px;
@@ -60,7 +54,13 @@ p {
     margin: 1px;
 }
 
-.options{
-    height:600px;
-    width: 00px;
+.colors:hover{
+    cursor: pointer;
+    border: 5px solid gray;
+}
+
+/* Laxman : added pointer and underlines to the container elements when hovered */
+.btn:hover{
+    cursor: pointer;
+    border-bottom: 5px solid rgb(89, 88, 88);
 }
