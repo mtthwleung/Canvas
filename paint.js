@@ -2,6 +2,7 @@ const canvas = document.querySelector("canvas");
 tools = document.querySelectorAll(".tool");
 ctx = canvas.getContext("2d");
 
+
 let isDrawing = false;
 let selectedTool = "brush";
 let MouseX; // variable declared, we will use later to return the x-coordinate of our mouse when a mouse event occurs
@@ -49,6 +50,10 @@ const drawing = (e) => {
         drawLine(e);
     } else if (selectedTool === "curvedLine") {
         drawCurvedLine(e);
+    } else if (selectedTool === "triangle"){   
+        drawTriangle(e);
+    } else if (selectedTool === "circle"){
+        drawCricle(e)
     }
 }
 
@@ -60,6 +65,24 @@ const stopDrawing = () => {
 
 const drawRect = (e) => {
     ctx.strokeRect(e.offsetX, e.offsetY, MouseX - e.offsetX, MouseY - e.offsetY);
+}
+
+const drawTriangle = (e) => {         //drawing triangle//
+    ctx.beginPath();
+    ctx.moveTo(MouseX, MouseY);
+    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.lineTo(MouseX*2 - e.offsetX, e.offsetY)
+    ctx.closePath()
+    ctx.stroke()
+
+}
+const drawCricle = (e) => {
+    //formula to calculate distance between initial and final cursor coordinates to calculate radius//
+    let radius = Math.sqrt(Math.pow((MouseX - e.offsetX),2) + Math.pow(MouseY - e.offsetY,2)); 
+     ctx.beginPath()
+    ctx.arc(MouseX,MouseY, radius, 0, 2*Math.PI );  //the calculated radius is put here in the parameters//
+    ctx.stroke()
+
 }
 
 const drawLine = (e) => {
@@ -74,6 +97,7 @@ const undo = () => {
     redoStack.push(undoStack.pop()); // removes last snapshot from undo stack
     ctx.clearRect(0, 0, canvas.width, canvas.height) // clears the canvas
     undoStack.forEach(snapshot => {
+        console.log("put imagedata");
         ctx.putImageData(snapshot, 0, 0);
     })
 }
