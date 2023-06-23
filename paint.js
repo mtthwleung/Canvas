@@ -21,6 +21,7 @@ const whiteBackground = () => {
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = selectedColor; // * clara
+    ctx.fillStyle = selectedColor; // double check this again
 }
 
 
@@ -118,9 +119,34 @@ const drawLine = (e) => {
     ctx.lineTo(e.offsetX, e.offsetY);
     ctx.stroke();
 
+const drawTriangle = (e) => {         //drawing triangle//
+    ctx.beginPath();
+    ctx.moveTo(MouseX, MouseY);
+    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.lineTo(MouseX*2 - e.offsetX, e.offsetY)
+    ctx.closePath()
+    ctx.stroke()
+
+}
+const drawCricle = (e) => {
+    //formula to calculate distance between initial and final cursor coordinates to calculate radius//
+    let radius = Math.sqrt(Math.pow((MouseX - e.offsetX),2) + Math.pow(MouseY - e.offsetY,2)); 
+     ctx.beginPath()
+    ctx.arc(MouseX,MouseY, radius, 0, 2*Math.PI );  //the calculated radius is put here in the parameters//
+    ctx.stroke()
+
+
+}
+
+const drawLine = (e) => {
+    ctx.beginPath()
+    ctx.moveTo(MouseX, MouseY);
+    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.stroke();
 }
 
 const drawCurvedLine = (e) => {
+
 
     let brush = "black";
     let brushWidth = 5;
@@ -131,6 +157,16 @@ const drawCurvedLine = (e) => {
 
 
 
+    ctx.beginPath();
+    ctx.moveTo(MouseX,MouseY);
+    ctx.bezierCurveTo(e.offsetX*2,e.offsetY/2,e.offsetX*2,e.offsetY/2,e.offsetX+100,e.offsetY+100);
+    ctx.stroke();
+}
+
+const drawCircle = (e) => {
+    ctx.beginPath();
+    let radius = Math.sqrt(Math.pow((MouseX - e.offsetX), 2) + Math.pow((MouseY - e.offsetY), 2)); // use Pythagorean theorem to get radius of circle
+    ctx.arc(MouseX, MouseY, radius, 0, 2 * Math.PI);
     ctx.stroke();
 }
 
@@ -160,7 +196,6 @@ canvas.addEventListener("mousemove", drawing);
 canvas.addEventListener("mouseup", stopDrawing);
 
 document.querySelector("#undo").addEventListener("click", undo);
-document.querySelector("#redo").addEventListener("click", redo);
 
 document.querySelector("#redo").addEventListener("click", redo);
 
@@ -195,3 +230,5 @@ colorBtns.forEach(btn => {
     colorPicker.parentElement.style.background = colorPicker.value;
     colorPicker.parentElement.click();
   })
+})
+
