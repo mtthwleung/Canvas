@@ -47,6 +47,7 @@ const startDrawing = (e) => {
     MouseY = e.offsetY; // setting these 2 variables to become the coordinates of our mouse when "mousedown" event fires
     ctx.beginPath();
     ctx.lineWidth = brushWidth;
+    ctx.strokeStyle = selectedColor;    
     ctx.fillStyle = selectedColor;
     snapshot = ctx.getImageData(0, 0, canvas.width, canvas.height); // copying canvas data to avoid dragging for rectangles
 }
