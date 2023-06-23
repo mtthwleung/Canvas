@@ -1,12 +1,12 @@
 const canvas = document.querySelector("canvas");
-tools = document.querySelectorAll(".tool");
-ctx = canvas.getContext("2d");
+const ctx = canvas.getContext("2d");
+let tools = document.querySelectorAll(".tool");
 let saveImg = document.querySelector("#save-img");
 let clearButton = document.querySelector(".clear-canvas");
-fillColor = document.querySelector("#fill-color"); 
-sizeSlider = document.querySelector("#size-slider"); 
-colorBtns = document.querySelectorAll(".colors .option");
-colorPicker = document.querySelector("#color-picker");
+let fillColor = document.querySelector("#fill-color"); 
+let sizeSlider = document.querySelector("#size-slider"); 
+let colorBtns = document.querySelectorAll(".colors .option");
+let colorPicker = document.querySelector("#color-picker");
 
 let isDrawing = false;
 let selectedTool = "brush";
@@ -21,7 +21,6 @@ const whiteBackground = () => {
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = selectedColor; // * clara
-    ctx.fillStyle = selectedColor; // double check this again
 }
 
 
@@ -82,6 +81,7 @@ const stopDrawing = () => {
     undoStack.push(snapshot); // taking a a snapshot of the shape you just drew and pushing to undoStack array in case it needs to be removed
 }
 
+//Drawing rectangle
 const drawRect = (e) => {
     if(!fillColor.checked) {
     return ctx.strokeRect(e.offsetX, e.offsetY, MouseX - e.offsetX, MouseY - e.offsetY);
@@ -89,7 +89,8 @@ const drawRect = (e) => {
     ctx.fillRect(e.offsetX, e.offsetY, MouseX - e.offsetX, MouseY - e.offsetY);
 }
 
-const drawTriangle = (e) => {         //drawing triangle//
+//Drawing Triangle
+const drawTriangle = (e) => {
     ctx.beginPath();
     ctx.moveTo(MouseX, MouseY);
     ctx.lineTo(e.offsetX, e.offsetY);
@@ -99,77 +100,30 @@ const drawTriangle = (e) => {         //drawing triangle//
     fillColor.checked ? ctx.fill() : ctx.stroke(); // if fillColor is checked fill triangle
 }
 
+//Drawing Circle
 const drawCricle = (e) => {
     //formula to calculate distance between initial and final cursor coordinates to calculate radius//
-    let radius = Math.sqrt(Math.pow((MouseX - e.offsetX),2) + Math.pow(MouseY - e.offsetY,2)); 
-     ctx.beginPath()
+    let radius = Math.sqrt(Math.pow((MouseX - e.offsetX),2) + Math.pow(MouseY - e.offsetY,2)); // Pythagorean theorem, a^2 + b^2 = c^2
+    ctx.beginPath()
     ctx.arc(MouseX,MouseY, radius, 0, 2*Math.PI );  //the calculated radius is put here in the parameters//
     fillColor.checked ? ctx.fill() : ctx.stroke();
 }
 
+//Drawing Line
 const drawLine = (e) => {
-    let brush = "black";
-    let brushWidth = 5;
-
     ctx.beginPath()
     ctx.moveTo(MouseX,MouseY);
     ctx.lineTo(e.offsetX,e.offsetY);
-
-    ctx.moveTo(MouseX, MouseY);
-    ctx.lineTo(e.offsetX, e.offsetY);
-    ctx.stroke();
-
-const drawTriangle = (e) => {         //drawing triangle//
-    ctx.beginPath();
-    ctx.moveTo(MouseX, MouseY);
-    ctx.lineTo(e.offsetX, e.offsetY);
-    ctx.lineTo(MouseX*2 - e.offsetX, e.offsetY)
-    ctx.closePath()
-    ctx.stroke()
-
-}
-const drawCricle = (e) => {
-    //formula to calculate distance between initial and final cursor coordinates to calculate radius//
-    let radius = Math.sqrt(Math.pow((MouseX - e.offsetX),2) + Math.pow(MouseY - e.offsetY,2)); 
-     ctx.beginPath()
-    ctx.arc(MouseX,MouseY, radius, 0, 2*Math.PI );  //the calculated radius is put here in the parameters//
-    ctx.stroke()
-
-
-}
-
-const drawLine = (e) => {
-    ctx.beginPath()
-    ctx.moveTo(MouseX, MouseY);
-    ctx.lineTo(e.offsetX, e.offsetY);
     ctx.stroke();
 }
 
+//Draw Curved Line
 const drawCurvedLine = (e) => {
-
-
-    let brush = "black";
-    let brushWidth = 5;
-
-    ctx.beginPath();
-    ctx.moveTo(MouseX,MouseY);
-    ctx.bezierCurveTo(e.offsetX*2,e.offsetY/2,e.offsetX*2,e.offsetY/2,e.offsetX+100,e.offsetY+100);
-
-
-
     ctx.beginPath();
     ctx.moveTo(MouseX,MouseY);
     ctx.bezierCurveTo(e.offsetX*2,e.offsetY/2,e.offsetX*2,e.offsetY/2,e.offsetX+100,e.offsetY+100);
     ctx.stroke();
 }
-
-const drawCircle = (e) => {
-    ctx.beginPath();
-    let radius = Math.sqrt(Math.pow((MouseX - e.offsetX), 2) + Math.pow((MouseY - e.offsetY), 2)); // use Pythagorean theorem to get radius of circle
-    ctx.arc(MouseX, MouseY, radius, 0, 2 * Math.PI);
-    ctx.stroke();
-}
-
 
 const undo = () => {
     redoStack.push(undoStack.pop()); // removes last snapshot from undo stack
@@ -214,7 +168,7 @@ clearButton.addEventListener("click", () => {
 sizeSlider.addEventListener("change", () => brushWidth = sizeSlider.value);
 
 
-//* trying to get the below function work *// 
+//* trying to get the below function work *//
 
 colorBtns.forEach(btn => {
     btn.addEventListener("click", () => { // adding click event to all color button
@@ -225,10 +179,9 @@ colorBtns.forEach(btn => {
     });
   });
   
-  colorPicker.addEventListener ("change", () => {
+  colorPicker.addEventListener("change", () => {
     // passing picked color value from color picker to last color btn background
     colorPicker.parentElement.style.background = colorPicker.value;
     colorPicker.parentElement.click();
   })
-})
 
