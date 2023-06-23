@@ -5,7 +5,7 @@ let saveImg = document.querySelector("#save-img");
 let clearButton = document.querySelector(".clear-canvas");
 let fillColor = document.querySelector("#fill-color"); 
 let sizeSlider = document.querySelector("#size-slider"); 
-let colorBtns = document.querySelectorAll(".colors .option");
+let colorBtns = document.querySelectorAll(".colors");
 let colorPicker = document.querySelector("#color-picker");
 
 let isDrawing = false;
@@ -13,7 +13,7 @@ let selectedTool = "brush";
 let MouseX; // variable declared, we will use later to return the x-coordinate of our mouse when a mouse event occurs
 let MouseY; // variable declared, we will use later to return the y-coordinate of our mouse when a mouse event occurs
 let brushWidth = 5;
-let selectedColor = "#000";
+let selectedColor = "black";
 const undoStack = [];
 const redoStack = [];
 
@@ -22,7 +22,6 @@ const whiteBackground = () => {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = selectedColor; // * clara
 }
-
 
 //This is used to ensure the canvas element scales correctly. Without it, sometimes you create lines/shapes on a different spot from where you clicked.
 window.addEventListener("load", () => {
@@ -48,7 +47,6 @@ const startDrawing = (e) => {
     MouseY = e.offsetY; // setting these 2 variables to become the coordinates of our mouse when "mousedown" event fires
     ctx.beginPath();
     ctx.lineWidth = brushWidth;
-    ctx.strokeStyle = selectedColor;
     ctx.fillStyle = selectedColor;
     snapshot = ctx.getImageData(0, 0, canvas.width, canvas.height); // copying canvas data to avoid dragging for rectangles
 }
@@ -59,7 +57,7 @@ const drawing = (e) => {
     ctx.putImageData(snapshot, 0, 0);
 
     if (selectedTool === "brush" || selectedTool === "eraser") {
-        ctx.strokeStlye = selectedTool === "eraser" ? "#fff" : selectedColor;
+        ctx.strokeStyle = selectedTool === "eraser" ? "#fff" : selectedColor;
         ctx.lineTo(e.offsetX, e.offsetY);
         ctx.stroke();
     } else if (selectedTool === "rectangle") {
@@ -81,7 +79,7 @@ const stopDrawing = () => {
     undoStack.push(snapshot); // taking a a snapshot of the shape you just drew and pushing to undoStack array in case it needs to be removed
 }
 
-//Drawing rectangle
+//Drawing Rectangle
 const drawRect = (e) => {
     if(!fillColor.checked) {
     return ctx.strokeRect(e.offsetX, e.offsetY, MouseX - e.offsetX, MouseY - e.offsetY);
@@ -172,14 +170,14 @@ sizeSlider.addEventListener("change", () => brushWidth = sizeSlider.value);
 
 colorBtns.forEach(btn => {
     btn.addEventListener("click", () => { // adding click event to all color button
-      document.querySelector(".option .selected").classList.remove("selected");
+      document.querySelector(".container .selected").classList.remove("selected"); // need to add CSS style to highlight color being selected
       btn.classList.add("selected");
       // passing selected btn background color as selectedColor value
       selectedColor = window.getComputedStyle(btn).getPropertyValue("background-color");
     });
   });
   
-  colorPicker.addEventListener("change", () => {
+  colorPicker.addEventListener("input", () => {
     // passing picked color value from color picker to last color btn background
     colorPicker.parentElement.style.background = colorPicker.value;
     colorPicker.parentElement.click();
