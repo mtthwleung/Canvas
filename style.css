@@ -7,10 +7,18 @@
 .layout{
     max-height: 100vh;
     max-width: 100%;
+    background-color: rgb(185, 229, 214);
+}
+
+#logo{
+   font-size: 30px;
+   color: rgb(220, 100, 20);
+    margin:5px ;
 }
 
 /* Clara: This is the top part of our website - just to be uniqute and more charactic  can comes up with a logo of something that is optional */ 
 p {
+    font-size: 22px;
     font-family: Arial, Helvetica, sans-serif;
     letter-spacing: 3px;
     text-align: center;
@@ -18,7 +26,8 @@ p {
     padding-top: 10px;
     padding-left: 10px;
     padding-bottom: 10px;
-    background-color: #f0f0f0;
+    
+    /* background-color: #f0f0f0; */
 }
 
 /* Clara: I have made the canvas width to 100% so it fits the whole screen - bit more similar to what we aiming for */
@@ -30,11 +39,11 @@ p {
     height:80vh;
     width: 100%;
     box-shadow: 10px;
+    border: 2px solid;
 }
 
 /* Clara: This is the toolbox section css - */
 .container{
-    /* border: 2px solid; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -60,12 +69,6 @@ label {
 
 }
 
-/* .color-container.purple:nth-child(5){
-    background-color: purple;
-    height: 40px;
-    width: 40px;
-} */
-
 .colors{
     height:30px;
     width: 30px;
@@ -74,8 +77,19 @@ label {
     cursor: pointer;
 }
 
-.selected {
-    border: 3px double green;
+/* hover effects on all colors and buttons, laxman */
+.colors:hover{
+    border: 6px solid rgb(116, 112, 112);
+}
+
+.btn:hover,.clear-canvas:hover:hover,.save-img:hover{
+    cursor: pointer;
+    border-bottom: 5px solid black;
+}
+
+/* selected color gets highlighterd, laxman */
+.selected{
+    border: 5px solid rgb(136, 131, 131);
 }
 
 .btn{
@@ -87,6 +101,7 @@ label {
 .active {
     border: 1px solid black;
 }
+
 
 #fill-color {
     cursor: pointer;
@@ -104,6 +119,10 @@ label {
 #size-slider {
     margin: 10px;
 }
+#size-slider:hover{
+    cursor: pointer;
+}
+
 
 button {
     width: 150px;
