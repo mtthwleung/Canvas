@@ -170,17 +170,22 @@ sizeSlider.addEventListener("change", () => brushWidth = sizeSlider.value);
 //* trying to get the below function work *//
 
 colorBtns.forEach(btn => {
-    btn.addEventListener("click", () => { // adding click event to all color button
-      document.querySelector(".container .selected").classList.remove("selected"); // need to add CSS style to highlight color being selected
-      btn.classList.add("selected");
+    btn.addEventListener("click", () => { // adding click event to all color button//
+      document.querySelector(".container .selected").classList.remove("selected"); 
+      btn.classList.add("selected");// adds 'selected' class to the color that you click
       // passing selected btn background color as selectedColor value
       selectedColor = window.getComputedStyle(btn).getPropertyValue("background-color");
-    });
+        selectedColor = colors.id;// the id of the color you click becomes selectedColor//
+        console.log(selectedColor);// just to see which color we have chosen on the console//
+});
   });
+  
   
   colorPicker.addEventListener("input", () => {
     // passing picked color value from color picker to last color btn background
     colorPicker.parentElement.style.background = colorPicker.value;
     colorPicker.parentElement.click();
   })
+
+
 
