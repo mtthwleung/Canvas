@@ -74,6 +74,10 @@ label {
     cursor: pointer;
 }
 
+.selected {
+    border: 3px double green;
+}
+
 .btn{
     height: 50px;
     width: 50px;
@@ -139,3 +143,10 @@ button {
     color: #4A98f7;
   }
   
+#selected-color {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 6px solid lightblue;
+    margin-right: 20px;
+}
