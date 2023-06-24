@@ -121,12 +121,32 @@ const drawLine = (e) => {
 //Draw Curved Line
 const drawCurvedLine = (e) => {
     ctx.beginPath();
-    ctx.moveTo(MouseX,MouseY);
-    ctx.bezierCurveTo(e.offsetX*2,e.offsetY/2,e.offsetX*2,e.offsetY/2,e.offsetX+100,e.offsetY+100);
+    ctx.moveTo(MouseX, MouseY);
+    
+
+    let cpX = (MouseX + e.offsetX) / 2;
+    let cpY = (MouseY - e.offsetY);
+    ctx.quadraticCurveTo(cpX, cpY, e.offsetX, e.offsetY);
+
+    // let cp1X = MouseX + (e.offsetX - MouseX) / 3;
+    // let cp1Y = MouseY;
+    // let cp2X = MouseX + ((e.offsetX - MouseX) * 2) / 10;
+    // let cp2Y = e.offsetY;
+    // ctx.bezierCurveTo(cp1X, cp1Y, cp2X, cp2Y, e.offsetX, e.offsetY);
+
     ctx.stroke();
 }
 
 let promptCounter = 0;
+
+let changeBackground = () => {
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.fillStyle = selectedColor;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    snapshot = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    undoStack.push(snapshot);
+}
 
 fillBackground.addEventListener("click", () => {
   if (promptCounter === 0) {
@@ -136,20 +156,10 @@ fillBackground.addEventListener("click", () => {
     );
     promptCounter++;
     if (userInput === "OK") {
-      ctx.closePath();
-      ctx.beginPath();
-      ctx.fillStyle = selectedColor;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      snapshot = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      undoStack.push(snapshot);
+        changeBackground();
     }
   } else {
-    ctx.closePath();
-    ctx.beginPath();
-    ctx.fillStyle = selectedColor;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    snapshot = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    undoStack.push(snapshot);
+        changeBackground();
   }
 });
 
@@ -166,11 +176,6 @@ const redo = () => {
     const snapshot = redoStack.pop();
     undoStack.push(snapshot);
     ctx.putImageData(snapshot, 0, 0);
-
-    // undoStack.push(redoStack.shift());
-    // undoStack.forEach(snapshot => {
-    //     ctx.putImageData(snapshot, 0, 0);
-    // })
 };
 
 canvas.addEventListener("mousedown", startDrawing);
@@ -194,9 +199,6 @@ clearButton.addEventListener("click", () => {
 });
 
 sizeSlider.addEventListener("change", () => brushWidth = sizeSlider.value);
-
-
-//* trying to get the below function work *//
 
 colorBtns.forEach(btn => {
     btn.addEventListener("click", () => { // adding click event to all color button//
