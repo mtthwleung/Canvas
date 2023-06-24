@@ -139,6 +139,15 @@ const drawCurvedLine = (e) => {
 
 let promptCounter = 0;
 
+let changeBackground = () => {
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.fillStyle = selectedColor;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    snapshot = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    undoStack.push(snapshot);
+}
+
 fillBackground.addEventListener("click", () => {
   if (promptCounter === 0) {
     let userInput = window.prompt(
@@ -147,20 +156,10 @@ fillBackground.addEventListener("click", () => {
     );
     promptCounter++;
     if (userInput === "OK") {
-      ctx.closePath();
-      ctx.beginPath();
-      ctx.fillStyle = selectedColor;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      snapshot = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      undoStack.push(snapshot);
+        changeBackground();
     }
   } else {
-    ctx.closePath();
-    ctx.beginPath();
-    ctx.fillStyle = selectedColor;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    snapshot = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    undoStack.push(snapshot);
+        changeBackground();
   }
 });
 
