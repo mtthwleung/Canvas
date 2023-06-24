@@ -7,6 +7,8 @@ let fillColor = document.querySelector("#fill-color");
 let sizeSlider = document.querySelector("#size-slider"); 
 let colorBtns = document.querySelectorAll(".colors");
 let colorPicker = document.querySelector("#color-picker");
+let colorIdentifier = document.querySelector("#selected-color");
+let fillBackground = document.querySelector("#fillBackground");
 
 let isDrawing = false;
 let selectedTool = "brush";
@@ -47,7 +49,7 @@ const startDrawing = (e) => {
     MouseY = e.offsetY; // setting these 2 variables to become the coordinates of our mouse when "mousedown" event fires
     ctx.beginPath();
     ctx.lineWidth = brushWidth;
-    ctx.strokeStyle = selectedColor;    
+    ctx.strokeStyle = selectedColor;
     ctx.fillStyle = selectedColor;
     snapshot = ctx.getImageData(0, 0, canvas.width, canvas.height); // copying canvas data to avoid dragging for rectangles
 }
@@ -124,6 +126,33 @@ const drawCurvedLine = (e) => {
     ctx.stroke();
 }
 
+let promptCounter = 0;
+
+fillBackground.addEventListener("click", () => {
+  if (promptCounter === 0) {
+    let userInput = window.prompt(
+      "WARNING: This will erase any shapes you have drawn on the canvas. You can press undo to reverse the change. Click 'OK' or press enter to continue",
+      "OK"
+    );
+    promptCounter++;
+    if (userInput === "OK") {
+      ctx.closePath();
+      ctx.beginPath();
+      ctx.fillStyle = selectedColor;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      snapshot = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      undoStack.push(snapshot);
+    }
+  } else {
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.fillStyle = selectedColor;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    snapshot = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    undoStack.push(snapshot);
+  }
+});
+
 const undo = () => {
     redoStack.push(undoStack.pop()); // removes last snapshot from undo stack
     ctx.clearRect(0, 0, canvas.width, canvas.height) // clears the canvas
@@ -175,9 +204,11 @@ colorBtns.forEach(btn => {
       btn.classList.add("selected");// adds 'selected' class to the color that you click
       // passing selected btn background color as selectedColor value
       selectedColor = window.getComputedStyle(btn).getPropertyValue("background-color");
-        selectedColor = colors.id;// the id of the color you click becomes selectedColor//
-        console.log(selectedColor);// just to see which color we have chosen on the console//
-});
+      selectedColor = colors.id;// the id of the color you click becomes selectedColor//
+      console.log(selectedColor);// just to see which color we have chosen on the console//
+      colorIdentifier.style.background = selectedColor; // changes color of the big circle to match selected color
+    });
+
   });
   
   

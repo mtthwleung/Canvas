@@ -162,3 +162,10 @@ button {
     color: #4A98f7;
   }
   
+#selected-color {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 6px solid lightblue;
+    margin-right: 20px;
+}
