@@ -17,15 +17,17 @@
         <canvas class="canvas"></canvas>
         <!-- Colors Options here, commented by clara-->      
         <div class="container">
-            <div class="colors" style="background-color: black;"></div>
-            <div class="colors" style="background-color: blue;"></div>
-            <div class="colors" style="background-color: red;"></div>
-            <div class="colors" style="background-color: yellow;"></div>
-            <div class="colors selected" style="background-color: green;"></div>
-        
+            <div id="selected-color" style="background-color: black;"></div>
+            <div class="colors option selected" style="background-color: black;"></div>
+            <div class="colors option" style="background-color: blue;"></div>
+            <div class="colors option" style="background-color: red;"></div>
+            <div class="colors option" style="background-color: yellow;"></div>
+            <div class="colors option" style="background-color: #A020F0"><input type="color" id="color-picker" value="#A020F0"></div>
+
         <!-- Tools Container here, commented by clara -->
         <!-- I have personalised the image icon so all sizes & styles are relativly similar-->
             <div class="btns-container">
+                <img src="https://static.thenounproject.com/png/1084363-200.png" class="btn tool" alt="" id="fillBackground">
                 <img src="img/undo.png" class="btn undo-btn" alt="" id="undo">
                 <img src="img/redo.png" class="btn redo-btn" alt="" id="redo">
                 <img src="img/brush.png" class="btn brush-btn tool active" alt="" id="brush">
@@ -39,18 +41,14 @@
         </div>
     </div>
         <!-- Fill color btn, Clear Canvas btn, and save img btn, clara-->
-        <div class="options-container">
-            <input type="checkbox" id="fill-color">
-            <label for="fill-color">Fill Color</label>
+    <div class="options-container">
+        <input type="checkbox" id="fill-color">
+        <label for="fill-color">Fill Color</label>
         <div class="row-buttons">
             <input type="range" id="size-slider" min="1" max="30" value="5">
             <button class="clear-canvas">Clear Canvas</button>
             <button class="save-img" id="save-img">Save As Image</button>
-            </div>
-        </div>
-                <button class="btn line-btn tool" id="line">Line</button>
-                <button class="btn line-btn tool" id="curvedLine">Curved Line</button>
-            </div>
+        
         </div>
     </div>
 

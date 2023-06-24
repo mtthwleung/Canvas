@@ -39,7 +39,11 @@ p {
     align-items: center;
     justify-content: center;
     height: 80px;
-   
+
+}
+
+.btns-container {
+    padding-left: 10px;
 }
 
 .options-container {
@@ -66,19 +70,19 @@ label {
     height:30px;
     width: 30px;
     border-radius: 3px;
-    margin: 10px;
+    margin: 13px;
+    cursor: pointer;
+}
+
+.selected {
+    border: 3px double green;
 }
 
 .btn{
-    height: 60px;
+    height: 50px;
     width: 50px;
     margin: 1px;
 }
-
-/* .options{
-    height:600px;
-    width: 00px;
-} */
 
 .active {
     border: 1px solid black;
@@ -104,7 +108,7 @@ label {
 button {
     width: 150px;
     color: #333;
-    padding: 11px 0;
+    padding: 10px 0;
     font-size: 13px;
     margin-bottom: 13px;
     background: none;
@@ -125,4 +129,24 @@ button {
 .row-buttons {
     display: flex;
     justify-content: center;
+}
+
+#color-picker {
+    height:30px;
+    width: 30px;
+    border-radius: 3px;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.option:is(:hover, .active) :where(span, label) {
+    color: #4A98f7;
+  }
+  
+#selected-color {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 6px solid lightblue;
+    margin-right: 20px;
 }
