@@ -60,7 +60,7 @@ const drawing = (e) => {
     ctx.putImageData(snapshot, 0, 0);
 
     if (selectedTool === "brush" || selectedTool === "eraser") {
-        ctx.strokeStyle = selectedTool === "eraser" ? "#fff" : selectedColor;
+        ctx.strokeStyle = selectedTool === "eraser" ? "white" : selectedColor;
         ctx.lineTo(e.offsetX, e.offsetY);
         ctx.stroke();
     } else if (selectedTool === "rectangle") {
@@ -123,11 +123,12 @@ const drawCurvedLine = (e) => {
     ctx.beginPath();
     ctx.moveTo(MouseX, MouseY);
     
-
+    //quadratic curve
     let cpX = (MouseX + e.offsetX) / 2;
     let cpY = (MouseY - e.offsetY);
     ctx.quadraticCurveTo(cpX, cpY, e.offsetX, e.offsetY);
 
+    //bezier curve
     // let cp1X = MouseX + (e.offsetX - MouseX) / 3;
     // let cp1Y = MouseY;
     // let cp2X = MouseX + ((e.offsetX - MouseX) * 2) / 10;
@@ -137,6 +138,7 @@ const drawCurvedLine = (e) => {
     ctx.stroke();
 }
 
+//functions for changing entire background color
 let promptCounter = 0;
 
 let changeBackground = () => {
@@ -151,7 +153,7 @@ let changeBackground = () => {
 fillBackground.addEventListener("click", () => {
   if (promptCounter === 0) {
     let userInput = window.prompt(
-      "WARNING: This will erase any shapes you have drawn on the canvas. You can press undo to reverse the change. Click 'OK' or press enter to continue",
+      "WARNING: This will erase any shapes you have drawn on the canvas.\nYou can press undo to reverse the change.\n\nClick 'OK' or press enter to continue",
       "OK"
     );
     promptCounter++;
@@ -163,15 +165,17 @@ fillBackground.addEventListener("click", () => {
   }
 });
 
+//undo function
 const undo = () => {
-    redoStack.push(undoStack.pop()); // removes last snapshot from undo stack
+    redoStack.push(undoStack.pop()); // removes last snapshot from undo stack and pushes it into redo stack
     ctx.clearRect(0, 0, canvas.width, canvas.height) // clears the canvas
-    undoStack.forEach(snapshot => {
+    undoStack.forEach(snapshot => { // redraws every previous snapshot
         console.log("put imagedata");
         ctx.putImageData(snapshot, 0, 0);
     })
 }
 
+//redo function
 const redo = () => {
     const snapshot = redoStack.pop();
     undoStack.push(snapshot);
@@ -183,9 +187,9 @@ canvas.addEventListener("mousemove", drawing);
 canvas.addEventListener("mouseup", stopDrawing);
 
 document.querySelector("#undo").addEventListener("click", undo);
-
 document.querySelector("#redo").addEventListener("click", redo);
 
+//function for saving image
 saveImg.addEventListener("click", (e) => {
   const link = document.createElement("a");
   link.download = "My awesome drawing.jpg";
@@ -193,27 +197,29 @@ saveImg.addEventListener("click", (e) => {
   link.click();
 });
 
+//function for clearing canvas
 clearButton.addEventListener("click", () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    whiteBackground();
+    whiteBackground(); // without this, images saved will have a transparent background
 });
 
+//sets brush width
 sizeSlider.addEventListener("change", () => brushWidth = sizeSlider.value);
 
+//below occurs when we click each colour
 colorBtns.forEach(btn => {
     btn.addEventListener("click", () => { // adding click event to all color button//
       document.querySelector(".container .selected").classList.remove("selected"); 
       btn.classList.add("selected");// adds 'selected' class to the color that you click
       // passing selected btn background color as selectedColor value
       selectedColor = window.getComputedStyle(btn).getPropertyValue("background-color");
-      selectedColor = colors.id;// the id of the color you click becomes selectedColor//
+    //   selectedColor = colors.id;// the id of the color you click becomes selectedColor//
       console.log(selectedColor);// just to see which color we have chosen on the console//
       colorIdentifier.style.background = selectedColor; // changes color of the big circle to match selected color
     });
-
   });
   
-  
+  //matching the background of the color picker with the selected color
   colorPicker.addEventListener("input", () => {
     // passing picked color value from color picker to last color btn background
     colorPicker.parentElement.style.background = colorPicker.value;
