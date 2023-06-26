@@ -25,6 +25,7 @@ To do this, check the "fill color" checkbox directly underneath the colour optio
 
 The 'fill background' icon directly to the right of the colors changes the entire background of the canvas to your selected colour when you click it.
 Be careful - this will erase any drawings currently on the canvas. A warning will appear the first time you click, but will no longer subsequently appear unless you refresh the page.
+
 ![image](https://github.com/laxmanketheth/CanvasProject/assets/133343244/3469ad12-8e68-4a16-8b3d-b36f57e22019) ![image](https://github.com/laxmanketheth/CanvasProject/assets/133343244/39c0d183-7a75-4671-9d6a-a71ebbc18a3c)
 
 The undo and redo arrows allow you to revert any changes you have made to the canvas. They revert the last change you have made (from clicking to releasing the mouse).
