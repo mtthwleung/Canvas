@@ -11,8 +11,12 @@ There are 7 tools available (brush, eraser, circle, rectangle, triangle, line, a
 
 The brush width is controlled by a slider on the bottom of the panel - dragging it to the left will set a narrow border for your shapes, and to the right will set a thick border.
 
+![image](https://github.com/laxmanketheth/CanvasProject/assets/133343244/20ce6255-f862-4eb3-913e-59fbce10a8b5)
+
 On the left side of the bottom panel are 4 pre-set colors (black, blue, red, yellow), and a colour picker which allows you to customize whatever colour you want to use. Use the slider on the colour picker to adjust the RGB (red, blue, green).
 The circular colour to the left displays the colour that is currently selected.
+
+![image](https://github.com/laxmanketheth/CanvasProject/assets/133343244/c2da3710-ec39-4746-8bea-140097818555)
 
 When drawing circles, rectangles, and triangles, you are also given the additional option to fill the entire area of the shape with your selected colour.
 To do this, check the "fill color" checkbox directly underneath the colour options and begin drawing.
