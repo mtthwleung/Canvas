@@ -16,7 +16,7 @@
     margin:5px ;
 }
 
-/* Clara: This is the top part of our website - just to be uniqute and more charactic  can comes up with a logo of something that is optional */ 
+/* Clara: This is the top part of our website - just to be unique and more charactic  can comes up with a logo of something that is optional */ 
 p {
     font-size: 22px;
     font-family: Arial, Helvetica, sans-serif;
@@ -59,14 +59,12 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
 label {
     font-family: Arial, Helvetica, sans-serif;
     letter-spacing: 2px;
     font-size: 16px;
-
 }
 
 .colors{
@@ -87,7 +85,7 @@ label {
     border-bottom: 5px solid black;
 }
 
-/* selected color gets highlighterd, laxman */
+/* selected color gets highlighted, laxman */
 .selected{
     border: 5px solid rgb(136, 131, 131);
 }
@@ -122,7 +120,6 @@ label {
 #size-slider:hover{
     cursor: pointer;
 }
-
 
 button {
     width: 150px;

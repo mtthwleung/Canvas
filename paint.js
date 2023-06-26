@@ -9,7 +9,6 @@ let colorBtns = document.querySelectorAll(".colors");
 let colorPicker = document.querySelector("#color-picker");
 let colorIdentifier = document.querySelector("#selected-color");
 let fillBackground = document.querySelector("#fillBackground");
-
 let isDrawing = false;
 let selectedTool = "brush";
 let MouseX; // variable declared, we will use later to return the x-coordinate of our mouse when a mouse event occurs
@@ -19,10 +18,11 @@ let selectedColor = "black";
 const undoStack = [];
 const redoStack = [];
 
+// to prevent transparent background when saving an image
 const whiteBackground = () => {
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = selectedColor; // * clara
+    ctx.fillStyle = selectedColor;
 }
 
 //This is used to ensure the canvas element scales correctly. Without it, sometimes you create lines/shapes on a different spot from where you clicked.
@@ -38,7 +38,6 @@ tools.forEach(btn => {
         document.querySelector(".btns-container .active").classList.remove("active"); // removes 'active' class from current active button
         btn.classList.add("active") // adds 'active' class to the button that you click
         selectedTool = btn.id; // the id of the button you click becomes selectedTool
-        console.log(selectedTool); // just to see which tool we have chosen on the console
     });
 });
 
@@ -57,7 +56,7 @@ const startDrawing = (e) => {
 //When we drag our mouse, this function executes
 const drawing = (e) => {
     if (!isDrawing) return; // below code will not run if isDrawing === false
-    ctx.putImageData(snapshot, 0, 0);
+    ctx.putImageData(snapshot, 0, 0); //to stop from creating a rectangle for every instance you move your mouse
 
     if (selectedTool === "brush" || selectedTool === "eraser") {
         ctx.strokeStyle = selectedTool === "eraser" ? "white" : selectedColor;
@@ -77,7 +76,7 @@ const drawing = (e) => {
 }
 
 const stopDrawing = () => {
-    isDrawing = false; // when we lift our mouse, isDrawing becomes false to stop the canvas from further drawing
+    isDrawing = false; // when we lift our mouse, isDrawing becomes false to stop the canvas from further drawing when we move our mouse
     snapshot = ctx.getImageData(0, 0, canvas.width, canvas.height);
     undoStack.push(snapshot); // taking a a snapshot of the shape you just drew and pushing to undoStack array in case it needs to be removed
 }
@@ -213,8 +212,6 @@ colorBtns.forEach(btn => {
       btn.classList.add("selected");// adds 'selected' class to the color that you click
       // passing selected btn background color as selectedColor value
       selectedColor = window.getComputedStyle(btn).getPropertyValue("background-color");
-    //   selectedColor = colors.id;// the id of the color you click becomes selectedColor//
-      console.log(selectedColor);// just to see which color we have chosen on the console//
       colorIdentifier.style.background = selectedColor; // changes color of the big circle to match selected color
     });
   });
