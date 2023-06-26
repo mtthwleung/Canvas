@@ -7,6 +7,7 @@ By default, the selected tool is a freeform brush, and the selected colour is bl
 
 To draw a shape, select one of our tools and click & drag on the canvas to create the shape. The selected shape will have a black border surrounding the icon.
 There are 7 tools available (brush, eraser, circle, rectangle, triangle, line, and curved line).
+
 ![image](https://github.com/laxmanketheth/CanvasProject/assets/133343244/4bb85aa3-b542-44ae-be60-375b7b61baec)
 
 The brush width is controlled by a slider on the bottom of the panel - dragging it to the left will set a narrow border for your shapes, and to the right will set a thick border.
